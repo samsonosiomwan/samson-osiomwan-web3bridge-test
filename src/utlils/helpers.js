@@ -33,11 +33,11 @@ export const checkInterest = (interest) => {
   
   
       if (interestRateToNumber === 10000){
-          newInterest = interestRateToNumber* 0.05.toFixed(2);
+          newInterest = (interestRateToNumber* 0.05) + interestRateToNumber; ;
       }else  if (interestRateToNumber === 20000){
-          newInterest = interestRateToNumber* 0.10.toFixed(2);
+          newInterest = (interestRateToNumber* 0.10) + interestRateToNumber;
       }else  if (interestRateToNumber === 30000){
-          newInterest = interestRateToNumber * 0.20.toFixed(2);
+          newInterest = ((interestRateToNumber* 0.20) + interestRateToNumber);
       }else newInterest = 0
   
       return formatCurrency(newInterest);

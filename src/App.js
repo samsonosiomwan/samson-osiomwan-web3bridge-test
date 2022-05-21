@@ -1,11 +1,13 @@
 
-import { useState } from 'react';
+import {  useEffect,  useState } from 'react';
 import './App.css';
-import { checkInterest } from './utlils/helpers';
+import { amountToWithdrawWeekly, checkInterest } from './utlils/helpers';
 
 function App() {
-
+   let users
   const [okadaRider, setOkadaRider] = useState({});
+  const [okadaRiders, setOkadaRiders] = useState({});
+  const [getAllOkadaRiders, setGetAllOkadaRiders] = useState(null);
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -13,8 +15,23 @@ function App() {
   }
 
   //check 5% interest on the amount to withdraw weekly
+
   
- 
+useEffect(() => {
+   localStorage.setItem("users", JSON.stringify(okadaRider));
+   setOkadaRiders([JSON.parse(localStorage.getItem("users") || "[]")])
+  // eslint-disable-next-line
+}, []);
+
+
+   const handleInvest = async (event) => {
+    event.preventDefault();
+    await okadaRiders.push({...okadaRider});
+   }
+
+  
+
+    
 
 
   return (
@@ -34,11 +51,12 @@ function App() {
             <option value={30000}>Tier 3 - 30,000</option>
           </select>
           </label>
+          <button onClick={handleInvest}>Invest</button>
         </form>
       </div>
       <div>
          <p>Interests: <span>{checkInterest(okadaRider.tier)}</span></p>
-         <p>Total Weekly Withdrawal: <span></span></p>
+         <p>Total Weekly Withdrawal Amount: <span>{amountToWithdrawWeekly(okadaRider.tier)}</span></p>
       </div>
         
 
