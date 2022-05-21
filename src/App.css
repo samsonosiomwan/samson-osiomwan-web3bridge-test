@@ -34,6 +34,11 @@
   cursor: pointer;
   border-radius: 5px;
   border: 1px solid white
+
+}
+.button:hover {
+  background-color: #e6e6e6;
+  color: black;
 }
 
 .form-container {
