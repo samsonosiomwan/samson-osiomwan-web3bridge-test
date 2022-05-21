@@ -6,8 +6,8 @@ import { amountToWithdrawWeekly, checkInterest } from './utlils/helpers';
 function App() {
    let users
   const [okadaRider, setOkadaRider] = useState({});
-  const [okadaRiders, setOkadaRiders] = useState({});
-  const [getAllOkadaRiders, setGetAllOkadaRiders] = useState(null);
+  const [okadaRiders, setOkadaRiders] = useState([]);
+  const [getAllRiders, setGetAllRiders] = useState([]);
 
   const handleChange = (event) => {
     const { id, value } = event.target;
@@ -24,11 +24,14 @@ useEffect(() => {
 }, []);
 
 
-   const handleInvest = async (event) => {
+   const handleInvest =  (event) => {
     event.preventDefault();
-    await okadaRiders.push({...okadaRider});
+    okadaRiders.push({...okadaRider});
    }
 
+   const handleGetAllRiders = () => {
+    setGetAllRiders(okadaRiders);
+    }
   
 
     
@@ -38,7 +41,8 @@ useEffect(() => {
     <div className="App">
       {/* <header className="App-header">
       </header> */}
-      <div className='form-container'>
+    <div className='form-container'>
+      <div >
         <form>
           <label>Enter Name: 
           <input type='text' id='name' onChange={handleChange} />
@@ -51,14 +55,36 @@ useEffect(() => {
             <option value={30000}>Tier 3 - 30,000</option>
           </select>
           </label>
-          <button onClick={handleInvest}>Invest</button>
         </form>
       </div>
+      
       <div>
          <p>Interests: <span>{checkInterest(okadaRider.tier)}</span></p>
          <p>Total Weekly Withdrawal Amount: <span>{amountToWithdrawWeekly(okadaRider.tier)}</span></p>
       </div>
-        
+      <div className='button' onClick={handleInvest}>
+        <span>Invest</span>
+      </div>
+      </div>
+
+
+      <div className='form-container'>
+      <div className='button' onClick={handleGetAllRiders}>
+        <span>Get All Okada riders</span>
+      </div>
+     
+      {getAllRiders.map((rider, index) => {
+        return (
+          <div key={index}>
+            <p>Name: <span>{rider.name}</span></p>
+            <p>Tier: <span>{rider.tier}</span></p>
+            <p>Interests: <span>{checkInterest(rider.tier)}</span></p>
+            <p>Total Weekly Withdrawal Amount: <span>{amountToWithdrawWeekly(rider.tier)}</span></p>
+          </div>
+        )
+      }
+      )}
+      </div>
 
     </div>
   );
