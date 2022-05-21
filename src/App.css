@@ -40,6 +40,10 @@
   background-color: #e6e6e6;
   color: black;
 }
+.button:active {
+  background-color: grey;
+  color: black;
+}
 
 .form-container {
   border: 1px solid white;
