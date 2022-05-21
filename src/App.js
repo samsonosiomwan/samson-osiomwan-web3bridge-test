@@ -4,7 +4,7 @@ import './App.css';
 import { amountToWithdrawWeekly, checkInterest } from './utlils/helpers';
 
 function App() {
-   let users
+  
   const [okadaRider, setOkadaRider] = useState({});
   const [okadaRiders, setOkadaRiders] = useState([]);
   const [getAllRiders, setGetAllRiders] = useState([]);
